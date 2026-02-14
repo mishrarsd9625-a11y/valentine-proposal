@@ -1,19 +1,45 @@
-function getSelectedItems() {
-    const selectedItems = [];
-    const giftCards = document.querySelectorAll('.gift-card');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Proposal</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .gift { margin: 10px; padding: 10px; border: 1px solid #ccc; display: inline-block; width: 200px; }
+        .gift button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Valentine Proposal</h1>
+    <div id="gifts">
+        <div class="gift">
+            <h2>Gift 1</h2>
+            <button onclick="selectGift('Gift 1')">Select</button>
+        </div>
+        <div class="gift">
+            <h2>Gift 2</h2>
+            <button onclick="selectGift('Gift 2')">Select</button>
+        </div>
+        <div class="gift">
+            <h2>Gift 3</h2>
+            <button onclick="selectGift('Gift 3')">Select</button>
+        </div>
+    </div>
+    <button onclick="sendWhatsAppMessage()">Send WhatsApp Message</button>
+    <script>
+        let selectedGifts = [];
 
-    giftCards.forEach(card => {
-        if (card.querySelector('input[type="checkbox"]').checked) {
-            selectedItems.push(card.dataset.giftName);
+        function selectGift(gift) {
+            selectedGifts.push(gift);
+            alert(gift + ' has been selected!');
         }
-    });
-    return selectedItems;
-}
 
-function whatsappNow() {
-    const selectedGifts = getSelectedItems();
-    const formattedGifts = selectedGifts.map(gift => `✓ ${gift}`).join('\n');
-    const message = `I said yes Shravuu ❤️\n\nMy selected gifts:\n${formattedGifts}\n\nI love you so much! 💘`;
-    const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-    window.open(whatsappLink);
-}
+        function sendWhatsAppMessage() {
+            const message = 'I have selected the following gifts for you: ' + selectedGifts.join(', ');
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
