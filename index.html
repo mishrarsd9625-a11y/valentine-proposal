@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For My Shravuu ❤️</title>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(to right, #ffdde1, #ee9ca7);
+  padding: 30px;
+  overflow-x: hidden;
+}
+
+h1 { color: #b30059; }
+
+button {
+  padding: 15px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4d88;
+  color: white;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.card {
+  background: white;
+  padding: 18px;
+  margin: 12px;
+  border-radius: 14px;
+  width: 220px;
+  display: inline-block;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.selected {
+  background: #ff4d88;
+  color: white;
+}
+
+.hidden { display: none; }
+
+.heart {
+  position: fixed;
+  bottom: -10px;
+  font-size: 22px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-800px); opacity: 0; }
+}
+
+.timer {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #660033;
+  font-weight: bold;
+}
+
+.popup {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- YouTube music player -->
+<iframe id="musicPlayer" width="0" height="0"
+src=""
+frameborder="0"
+allow="autoplay">
+</iframe>
+
+<h1>Hey Shravya ❤️</h1>
+<h2>My Shravuu</h2>
+
+<div class="timer" id="loveTimer"></div>
+
+<h3>I want to ask you something special…</h3>
+
+<button onclick="start()">Yes ❤️</button>
+
+<div id="loveSection" class="hidden">
+
+  <h2>Will you be my Valentine? 💘</h2>
+
+  <p>
+  Shravuu… ❤️  
+  Your eyes are the most beautiful thing I've ever seen.  
+  I could get lost in them forever.  
+
+  And the way you sing… it gives me peace I can't explain.  
+  Your voice feels like home to me.  
+
+  You make my life softer, happier, and so much more meaningful 💘
+  </p>
+
+  <h3>Select what you want 😌</h3>
+
+  <div class="card" onclick="selectItem(this)">🍫 Cadbury Oreo</div>
+  <div class="card" onclick="selectItem(this)">🍫 Cadbury Silk</div>
+  <div class="card" onclick="selectItem(this)">🌶️ Balaji Chilli Tadka</div>
+  <div class="card" onclick="selectItem(this)">😋 Balaji Masala Masti</div>
+  <div class="card" onclick="selectItem(this)">🌹 Flower</div>
+
+  <br><br>
+  <button onclick="final()">Done ❤️</button>
+</div>
+
+<div id="finalMsg" class="hidden">
+  <h2>Your Valentine surprise is locked 💘</h2>
+  <h3>I love you Shravuu ❤️</h3>
+</div>
+
+<div class="popup" id="popup">
+  <h2>Call me now ❤️</h2>
+  <button onclick="callNow()">📞 Call</button>
+  <button onclick="whatsappNow()">💬 WhatsApp</button>
+</div>
+
+<script>
+
+// Love Timer
+function updateLoveTimer() {
+  const startDate = new Date("June 9, 2025");
+  const today = new Date();
+
+  const diffTime = today - startDate;
+  const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const months = Math.floor(days / 30);
+  const remainingDays = days % 30;
+
+  document.getElementById("loveTimer").innerHTML =
+  "Together since 9 June 2025 — " + months + " months " + remainingDays + " days 💘";
+}
+
+setInterval(updateLoveTimer, 1000);
+updateLoveTimer();
+
+// Start button
+function start() {
+  document.getElementById("loveSection").classList.remove("hidden");
+  startHearts();
+
+  document.getElementById("musicPlayer").src =
+  "https://www.youtube.com/embed/CBftmGirV50?autoplay=1&loop=1&playlist=CBftmGirV50";
+}
+
+// Gift selection
+function selectItem(element) {
+  element.classList.toggle("selected");
+}
+
+// Final step
+function final() {
+  document.getElementById("finalMsg").classList.remove("hidden");
+  document.getElementById("popup").style.display = "block";
+}
+
+// Hearts animation
+function startHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 500);
+}
+
+// Call
+function callNow() {
+  window.location.href = "tel:+919625049026";
+}
+
+// WhatsApp
+function whatsappNow() {
+  window.location.href = "https://wa.me/919625049026?text=I%20said%20yes%20Shravuu%20❤️";
+}
+
+</script>
+
+</body>
+</html>
