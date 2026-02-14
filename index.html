@@ -5,41 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine Proposal</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .gift { margin: 10px; padding: 10px; border: 1px solid #ccc; display: inline-block; width: 200px; }
-        .gift button { margin-top: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffcccb;
+            text-align: center;
+            color: #333;
+        }
+        .heart {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: float 3s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        #timer {
+            font-size: 2em;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Valentine Proposal</h1>
-    <div id="gifts">
-        <div class="gift">
-            <h2>Gift 1</h2>
-            <button onclick="selectGift('Gift 1')">Select</button>
-        </div>
-        <div class="gift">
-            <h2>Gift 2</h2>
-            <button onclick="selectGift('Gift 2')">Select</button>
-        </div>
-        <div class="gift">
-            <h2>Gift 3</h2>
-            <button onclick="selectGift('Gift 3')">Select</button>
-        </div>
-    </div>
-    <button onclick="sendWhatsAppMessage()">Send WhatsApp Message</button>
+    <h1>Will You Be My Valentine?</h1>
+    <div id="timer"></div>
+    <div id="hearts"></div>
+    <h2>Select Your Gift:</h2>
+    <select id="gift-select">
+        <option value="roses">Roses</option>
+        <option value="chocolate">Chocolate</option>
+        <option value="teddy">Teddy Bear</option>
+    </select>
+    <button id="send-gift">Send Gift</button>
+    <h2>Music Player</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
     <script>
-        let selectedGifts = [];
+        // Love timer
+        const proposalDate = new Date('2026-02-14T12:13:14Z').getTime();
+        const timerElement = document.getElementById('timer');
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = proposalDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            timerElement.innerHTML = `Time Until Proposal: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }, 1000);
 
-        function selectGift(gift) {
-            selectedGifts.push(gift);
-            alert(gift + ' has been selected!');
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = Math.random() * window.innerHeight + 'px';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
         }
+        setInterval(createHeart, 500);
 
-        function sendWhatsAppMessage() {
-            const message = 'I have selected the following gifts for you: ' + selectedGifts.join(', ');
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
+        // Send gift action
+        document.getElementById('send-gift').onclick = function() {
+            const selectedGift = document.getElementById('gift-select').value;
+            const message = `You have selected: ${selectedGift}`;
+            window.open('https://wa.me/?text=' + encodeURIComponent(message), '_blank');
+        };
     </script>
 </body>
 </html>
